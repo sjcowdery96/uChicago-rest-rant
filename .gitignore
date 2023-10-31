@@ -1,3 +1,4 @@
+#tells git to ignore these files when uploading. Good practice for keeping files safe!
 node_modules
 .env
 .DS_Store
