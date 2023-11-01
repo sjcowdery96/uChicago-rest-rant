@@ -11,15 +11,15 @@ app.engine('jsx', require('express-react-views').createEngine())
 //if we navigate to /places we render our file from ./controllers/places
 app.use('/places', require('./controllers/places'))
 
-//our homepage is defined here with the base path /
+//our homepage is defined here with the home page jsx file
 app.get('/', (req, res) => {
     res.render('home')
 })
 //the * in this case means...anything else
-//so if we get anything other than / (or places) as a path, return 404
+//so if we get anything other than / (or places) as a path, return 404 jsx file
 app.get('*', (req, res) => {
-    res.status(404).send('<h1>404 Page</h1>')
+    res.render('error404')
 })
-
+//throw that tthaaang on the port
 app.listen(process.env.PORT)
 
