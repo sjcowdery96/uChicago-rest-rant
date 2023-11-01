@@ -1,10 +1,15 @@
 const router = require('express').Router()
 
-//need to fetch new places before we get existing places
+//post method to create new
+router.post('/', (req, res) => {
+    console.log(req.body)
+    res.send('POST /places')
+})
+
+//need to fetch new places before we GET existing places
 router.get('/new', (req, res) => {
     res.render('places/new')
 })
-
 
 // GET /places
 router.get('/', (req, res) => {
