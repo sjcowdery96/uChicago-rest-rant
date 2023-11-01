@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
-
 //crack open some of that React stuff with those jsx files
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
