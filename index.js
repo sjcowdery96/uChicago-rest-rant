@@ -1,11 +1,15 @@
+//setting up express
 require('dotenv').config()
 const express = require('express')
 const app = express()
 
+
 //crack open some of that React stuff with those jsx files
+// Express Settings
+app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
-
+app.use(express.static('public'))
 
 //if we navigate to /places we render our file from ./controllers/places
 app.use('/places', require('./controllers/places'))
@@ -22,3 +26,10 @@ app.get('*', (req, res) => {
 //throw that tthaaang on the port
 app.listen(process.env.PORT)
 
+
+
+/*
+Paste stuff here
+
+
+ */
