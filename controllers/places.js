@@ -1,5 +1,11 @@
 const router = require('express').Router()
 
+//need to fetch new places before we get existing places
+router.get('/new', (req, res) => {
+    res.render('places/new')
+})
+
+
 // GET /places
 router.get('/', (req, res) => {
     let places = [
@@ -46,10 +52,6 @@ router.get('/', (req, res) => {
             pic: "/images/r6.jpg"
         }
     ]
-
-
-
-
     res.render('places/index', { places })
 })
 
