@@ -18,10 +18,17 @@ function show(data) {
                         </div>
                     </div>
                     <div>
-                        <img src={data.place.img} alt={data.place.name}></img>
+                        <img src={data.place.pic} alt={data.place.name}></img>
                     </div>
-
                 </div>
+                <a href="" className="btn btn-warning">
+                    Edit
+                </a>
+                <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+                    <button type="submit" className="btn btn-danger">
+                        Delete
+                    </button>
+                </form>
             </main>
         </Def>
     )

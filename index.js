@@ -1,8 +1,8 @@
-//setting up express
+// Modules and Globals
 require('dotenv').config()
 const express = require('express')
 const app = express()
-
+const methodOverride = require('method-override')
 
 //crack open some of that React stuff with those jsx files
 // Express Settings
@@ -11,6 +11,8 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+
 
 
 //if we navigate to /places we render our file from ./controllers/places
