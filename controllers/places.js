@@ -19,17 +19,6 @@ router.post('/', (req, res) => {
     res.redirect('/places')
 })
 
-
-//need to fetch new places before we GET existing places
-router.get('/new', (req, res) => {
-    res.render('places/new')
-})
-
-// GET /places
-router.get('/', (req, res) => {
-    res.render('places/index', { places })
-})
-
 //SHOW
 router.get('/:id', (req, res) => {
     let id = Number(req.params.id)
@@ -44,6 +33,15 @@ router.get('/:id', (req, res) => {
     }
 })
 
+//need to fetch new places before we GET existing places
+router.get('/new', (req, res) => {
+    res.render('places/new')
+})
+
+// GET /places
+router.get('/', (req, res) => {
+    res.render('places/index', { places })
+})
 
 
 //sends our exports
