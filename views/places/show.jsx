@@ -5,7 +5,7 @@ function show(data) {
     return (
         <Def>
             <main>
-                <div class="twin-displays">
+                <div className="twin-displays">
                     <div>
                         <div>
                             <h1>{data.place.name}</h1>
@@ -14,7 +14,7 @@ function show(data) {
                         </div>
                         <div>
                             <h3>{data.place.city} , {data.place.state} </h3>
-                            <p>Come visit {data.place.name}! best known for our {data.place.cuisines} cuisine!</p>
+                            <p>Come visit {data.place.name}! best known for our {data.place.cuisines} cuisines!</p>
                         </div>
                     </div>
                     <div>
