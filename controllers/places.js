@@ -33,6 +33,23 @@ router.get('/:id', (req, res) => {
     }
 })
 
+//EDIT
+router.get('/:id/edit', (req, res) => {
+    let id = Number(req.params.id)
+    //check for silly entries that are not numbers
+    if (isNaN(id)) {
+        res.render('error404')
+    }
+    //check for values outside the array
+    else if (!places[id]) {
+        res.render('error404')
+    }
+    else {
+        //else render our edit places with the parsed param id
+        res.render('places/edit', { place: places[id] })
+    }
+})
+
 //DELETE
 router.delete('/:id', (req, res) => {
     let id = Number(req.params.id)
@@ -49,11 +66,13 @@ router.delete('/:id', (req, res) => {
 })
 
 
-
 //need to fetch new places before we GET existing places
 router.get('/new', (req, res) => {
     res.render('places/new')
 })
+
+
+
 
 // GET /places
 router.get('/', (req, res) => {
