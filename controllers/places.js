@@ -1,23 +1,78 @@
 const router = require('express').Router()
-const places = require("../models/places.js")
+const db = require('../models')
 
-//post method to create new
-router.post('/', (req, res) => {
-    console.log(req.body)
-    if (!req.body.pic) {
-        // Default image if one is not provided
-        req.body.pic = 'http://placekitten.com/400/400'
-    }
-    //logic checks for missing data in the body
-    if (!req.body.city) {
-        req.body.city = 'Anytown'
-    }
-    if (!req.body.state) {
-        req.body.state = 'USA'
-    }
-    places.push(req.body)
-    res.redirect('/places')
+//gets places
+router.get('/', (req, res) => {
+    //goes into Mongo
+    db.Place.find()
+        //for each place, render it
+        .then((places) => {
+            res.render('places/index', { places })
+        })
+        .catch(err => {
+            console.log(err)
+            res.render('error404')
+        })
 })
+
+
+//post method to create new restrant
+router.post('/', (req, res) => {
+    //creates a new place in mongoDB out of our req body
+    db.Place.create(req.body)
+        .then(() => {
+            //then redirects to homepage
+            res.redirect('/places')
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.render('error404')
+        })
+})
+
+router.get('/new', (req, res) => {
+    res.render('places/new')
+})
+
+//gets place by ID
+router.get('/:id', (req, res) => {
+    db.Place.findById(req.params.id)
+        .then(place => {
+            res.render('places/show', { place })
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.render('error404')
+        })
+})
+
+
+router.put('/:id', (req, res) => {
+    res.send('PUT /places/:id stub')
+})
+
+router.delete('/:id', (req, res) => {
+    res.send('DELETE /places/:id stub')
+})
+
+router.get('/:id/edit', (req, res) => {
+    res.send('GET edit form stub')
+})
+
+router.post('/:id/rant', (req, res) => {
+    res.send('GET /places/:id/rant stub')
+})
+
+router.delete('/:id/rant/:rantId', (req, res) => {
+    res.send('GET /places/:id/rant/:rantId stub')
+})
+
+
+//sends our exports
+module.exports = router
+
+/*
+
 
 //SHOW
 router.get('/:id', (req, res) => {
@@ -100,22 +155,19 @@ router.get('/new', (req, res) => {
     res.render('places/new')
 })
 
-
-
-
 // GET /places
 router.get('/', (req, res) => {
-    res.render('places/index', { places })
+    db.Place.find()
+        .then((places) => {
+            res.render('places/index', { places })
+        })
+        .catch(err => {
+            console.log(err)
+            res.render('error404')
+        })
 })
-
 
 //sends our exports
 module.exports = router
-
-
-
-
-/*
-
 
 */

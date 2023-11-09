@@ -27,7 +27,7 @@ function Def(html) {
             <footer class="footer">
                 <span>
                     <p>
-                        <time datetime="{{current_year}}-{{current_month}}-{{current_day}}"> &copy; </time>
+                        <time dateTime="{{current_year}}-{{current_month}}-{{current_day}}"> &copy; </time>
                         Sam C -- uChicago Bootcamp
                     </p>
                     <a href="#">Terms of Service</a>
