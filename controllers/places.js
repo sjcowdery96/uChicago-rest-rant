@@ -48,9 +48,35 @@ router.get('/:id', (req, res) => {
         })
 })
 
+//COMMENTS
+router.post('/:id/comment', (req, res) => {
+    console.log(req.body)
+    //this has to be "on" because the checkbox html element only has "on" and "off" states
+    if (req.body.rant === 'on') {
+        //set the request body rant boolean to true. That mf is a RANT
+        req.body.rant = true
+    }
+    //sending to database
+    db.Place.findById(req.params.id)
+        .then(place => {
+            db.Comment.create(req.body)
+                .then(comment => {
+                    place.comments.push(comment.id)
+                    place.save()
+                        .then(() => {
+                            res.redirect(`/places/${req.params.id}`)
+                        })
+                })
+                .catch(err => {
+                    res.render('error404')
+                })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
 
 
-
+})
 
 router.put('/:id', (req, res) => {
     res.send('PUT /places/:id stub')
@@ -64,12 +90,9 @@ router.get('/:id/edit', (req, res) => {
     res.send('GET edit form stub')
 })
 
-router.post('/:id/rant', (req, res) => {
-    res.send('GET /places/:id/rant stub')
-})
 
-router.delete('/:id/rant/:rantId', (req, res) => {
-    res.send('GET /places/:id/rant/:rantId stub')
+router.delete('/:id/comment/:commentID', (req, res) => {
+    res.send('GET /places/:id/comment/:commentID stub')
 })
 
 
@@ -77,6 +100,29 @@ router.delete('/:id/rant/:rantId', (req, res) => {
 module.exports = router
 
 /*
+
+  router.post('/:id/comment', (req, res) => {
+    console.log(req.body)
+    db.Place.findById(req.params.id)
+    .then(place => {
+        db.Comment.create(req.body)
+        .then(comment => {
+            place.comments.push(comment.id)
+            place.save()
+            .then(() => {
+                res.redirect(`/places/${req.params.id}`)
+            })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
+    })
+    .catch(err => {
+        res.render('error404')
+    })
+})
+
+
 
 
 //SHOW

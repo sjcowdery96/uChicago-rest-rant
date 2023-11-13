@@ -9,7 +9,7 @@ function show(data) {
         comments = data.place.comments.map(c => {
             return (
                 <div className="border">
-                    <h2 className="rant">{c.rant ? 'Rant! ðŸ˜¡' : 'Rave! ðŸ˜»'}</h2>
+                    <h2 className="rant">{c.rant ? 'Rant! :-(' : 'Rave! :-)'}</h2>
                     <h4>{c.content}</h4>
                     <h3>
                         <stong>- {c.author}</stong>
@@ -41,6 +41,28 @@ function show(data) {
                     <div>
                         <h2>{comments}</h2>
                     </div>
+                </div>
+                <div>
+                    <h3>Leave a comment</h3>
+                    <form method="POST" action={`/places/${data.place.id}/comment`}>
+                        <div className="form-group">
+                            <label htmlFor="author">Author:</label>
+                            <input type="text" id="author" name="author" required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="content">Content:</label>
+                            <textarea id="content" name="content" rows="5" cols="30" required></textarea>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="stars">Star Rating:</label>
+                            <input type="number" id="stars" name="stars" step="0.5" min="0" max="5" required />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="rant">Rant:</label>
+                            <input type="checkbox" id="rant" name="rant" />
+                        </div>
+                        <input className="btn btn-primary" type="submit" value="Comment" />
+                    </form>
                 </div>
                 <a href={`/places/${data.id}/edit`} className="btn btn-warning">
                     Edit
