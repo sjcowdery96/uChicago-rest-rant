@@ -13,20 +13,42 @@ function show(data) {
             return tot + c.stars
         }, 0)
         let averageRating = sumRatings / data.place.comments.length
+        let stars = ''
+        function checkRange(value) {
+            switch (true) {
+                case value < 2:
+                    return "👎";
+                case value >= 2 && value < 3:
+                    return "👏";
+                case value >= 3 && value < 3.5:
+                    return "👏👏";
+                case value >= 3.5 && value < 4:
+                    return "👏👏👏";
+                case value >= 4 && value < 4.5:
+                    return "👏👏👏👏";
+                default:
+                    return "👏👏👏👏👏";
+            }
+        }
+        stars = checkRange(averageRating)
+        averageRating = Math.round(averageRating)
         rating = (
-            <h3>
-                {Math.round(averageRating)} stars
-            </h3>
+            <span>
+                {averageRating}/5 {stars}
+            </span>
         )
         comments = data.place.comments.map(c => {
             return (
                 <div className="border">
-                    <h2 className="rant">{c.rant ? 'Rant! :-(' : 'Rave! :-)'}</h2>
+                    <h2 className="rant">{c.rant ? 'Rant! 😡' : 'Rave! 😍'}</h2>
                     <h4>{c.content}</h4>
                     <h3>
                         <stong>- {c.author}</stong>
                     </h3>
                     <h4>Rating: {c.stars}</h4>
+                    <form method="POST" action={`/places/${data.place.id}/comment/${c.id}?_method=DELETE`}>
+                        <input type="submit" className="btn btn-danger" value="Delete Comment" />
+                    </form>
                 </div>
             )
         })
@@ -75,10 +97,10 @@ function show(data) {
                         <input className="btn btn-primary" type="submit" value="Comment" />
                     </form>
                 </div>
-                <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
                     Edit
                 </a>
-                <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+                <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                     <button type="submit" className="btn btn-danger">
                         Delete
                     </button>
@@ -92,6 +114,18 @@ module.exports = show
 
 
 /*
+if (data.place.comments.length) {
+  comments = data.place.comments.map(c => {
+    return (
+      <div className="border col-sm-4">
+        ...
+        <form method="POST" action={`/places/${data.place.id}/comment/${c.id}?_method=DELETE`}>
+          <input type="submit" className="btn btn-danger" value="Delete Comment" />
+        </form>
+      </div>
+    )
+  })
+}
 
 
 */
