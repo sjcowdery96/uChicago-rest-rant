@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
             res.redirect('/places')
         })
         .catch(err => {
-            console.log('Posr New Place err', err)
+            console.log('Post New Place err', err)
             res.render('error404')
         })
 })

@@ -76,7 +76,7 @@ function show(data) {
                     </div>
                 </div>
                 <div>
-                    <h3>Leave a comment</h3>
+                    <h3>Leave a review</h3>
                     <form method="POST" action={`/places/${data.place.id}/comment`}>
                         <div className="form-group">
                             <label htmlFor="author">Author:</label>
@@ -97,14 +97,20 @@ function show(data) {
                         <input className="btn btn-primary" type="submit" value="Comment" />
                     </form>
                 </div>
-                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
-                    Edit
-                </a>
-                <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
-                    <button type="submit" className="btn btn-danger">
-                        Delete
-                    </button>
-                </form>
+                <div className="form-group">
+                    <div>
+                        <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
+                            Edit
+                        </a>
+                    </div>
+                    <div>
+                        <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
+                            <button type="submit" className="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </main>
         </Def>
     )
